@@ -1,0 +1,4 @@
+ .carousel-item img {
+    height: 100vh; /* 100% dell’altezza visibile della finestra */
+    object-fit: cover; /* ritaglia l’immagine mantenendo le proporzioni */
+  }
