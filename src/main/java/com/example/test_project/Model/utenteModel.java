@@ -1,10 +1,14 @@
 package com.example.test_project.Model;
 
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,17 +24,12 @@ public class utenteModel {
 	private String password;
 	private String ruolo;
 	private String utentecol;
-	
-	public utenteModel(long idutente, String nome, String cognome, String email, String password, String ruolo,
-			String utentecol) {
-		this.idutente = idutente;
-		this.nome = nome;
-		this.cognome = cognome;
-		this.email = email;
-		this.password = password;
-		this.ruolo = ruolo;
-		this.utentecol = utentecol;
-	}
+
+	@OneToMany(mappedBy = "utente")
+	private List<alloggioModel> alloggi;
+
+	@OneToMany(mappedBy = "utente")
+	private List<prenotazioneModel> prenotazioni;
 	
 	public utenteModel() {
 		
