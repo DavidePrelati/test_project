@@ -24,7 +24,7 @@ public class recensioneModel {
 	
 	@ManyToOne
 	@JoinColumn(name="id_utente")
-	private utenteModel ytente;
+	private utenteModel utente;
 	
 	@ManyToOne
 	@JoinColumn(name="id_alloggio")
@@ -66,12 +66,12 @@ public class recensioneModel {
 		this.data_recensione = data_recensione;
 	}
 
-	public utenteModel getYtente() {
-		return ytente;
+	public utenteModel getUtente() {
+		return utente;
 	}
 
-	public void setYtente(utenteModel ytente) {
-		this.ytente = ytente;
+	public void setUtente(utenteModel utente) {
+		this.utente = utente;
 	}
 
 	public alloggioModel getAlloggio() {

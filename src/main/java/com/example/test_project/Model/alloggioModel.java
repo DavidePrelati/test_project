@@ -34,6 +34,12 @@ public class alloggioModel {
 	@OneToMany(mappedBy = "alloggio")
 	private List<immagineModel> immagini;
 	
+	@OneToMany(mappedBy = "alloggio")
+	private List<recensioneModel> recensioni;
+	
+	@OneToMany(mappedBy = "alloggio")
+	private List<alloggioServizioModel> alloservi;
+	
 	@ManyToOne
 	@JoinColumn(name="id_utente")
 	private utenteModel utente;
@@ -153,6 +159,26 @@ public class alloggioModel {
 	}
 
 
+	public List<recensioneModel> getRecensioni() {
+		return recensioni;
+	}
+
+
+	public void setRecensioni(List<recensioneModel> recensioni) {
+		this.recensioni = recensioni;
+	}
+
+
+	public List<alloggioServizioModel> getAlloservi() {
+		return alloservi;
+	}
+
+
+	public void setAlloservi(List<alloggioServizioModel> alloservi) {
+		this.alloservi = alloservi;
+	}
+
+
 	public utenteModel getUtente() {
 		return utente;
 	}
@@ -161,7 +187,6 @@ public class alloggioModel {
 	public void setUtente(utenteModel utente) {
 		this.utente = utente;
 	}
-
 	
-
+	
 }

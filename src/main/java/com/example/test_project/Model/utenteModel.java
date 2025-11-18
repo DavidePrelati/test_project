@@ -31,6 +31,9 @@ public class utenteModel {
 	@OneToMany(mappedBy = "utente")
 	private List<prenotazioneModel> prenotazioni;
 	
+	@OneToMany(mappedBy = "utente")
+	private List<recensioneModel> recensioni;
+	
 	public utenteModel() {
 		
 	}
@@ -90,6 +93,31 @@ public class utenteModel {
 	public void setUtentecol(String utentecol) {
 		this.utentecol = utentecol;
 	}
+
+	public List<alloggioModel> getAlloggi() {
+		return alloggi;
+	}
+
+	public void setAlloggi(List<alloggioModel> alloggi) {
+		this.alloggi = alloggi;
+	}
+
+	public List<prenotazioneModel> getPrenotazioni() {
+		return prenotazioni;
+	}
+
+	public void setPrenotazioni(List<prenotazioneModel> prenotazioni) {
+		this.prenotazioni = prenotazioni;
+	}
+
+	public List<recensioneModel> getRecensioni() {
+		return recensioni;
+	}
+
+	public void setRecensioni(List<recensioneModel> recensioni) {
+		this.recensioni = recensioni;
+	}
+
 	
 	
 }
