@@ -18,7 +18,7 @@ public class alloggioModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long idalloggio;
 	private String titolo;
 	private String descrizione;
 	private String indirizzo;
@@ -49,13 +49,13 @@ public class alloggioModel {
 	}
 
 
-	public long getId() {
-		return id;
+	public long getIdAlloggio() {
+		return idalloggio;
 	}
 
 
-	public void setId(long id) {
-		this.id = id;
+	public void setIdAlloggio(long idalloggio) {
+		this.idalloggio = idalloggio;
 	}
 
 
