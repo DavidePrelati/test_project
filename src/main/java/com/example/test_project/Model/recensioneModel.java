@@ -20,7 +20,7 @@ public class recensioneModel {
 	
 	private int valutazione;
 	private String commento;
-	private LocalDate data_recensione;
+	private LocalDate dataRecensione;
 	
 	@ManyToOne
 	@JoinColumn(name="id_utente")
@@ -58,12 +58,12 @@ public class recensioneModel {
 		this.commento = commento;
 	}
 
-	public LocalDate getData_recensione() {
-		return data_recensione;
+	public LocalDate getDataRecensione() {
+		return dataRecensione;
 	}
 
-	public void setData_recensione(LocalDate data_recensione) {
-		this.data_recensione = data_recensione;
+	public void setDataRecensione(LocalDate dataRecensione) {
+		this.dataRecensione = dataRecensione;
 	}
 
 	public utenteModel getUtente() {
