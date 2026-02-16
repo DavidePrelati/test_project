@@ -4,33 +4,46 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.example.test_project.DTO.AlloggioDTO;
+import com.example.test_project.DTO.AlloggioDettaglioDTO;
+import com.example.test_project.Mapper.AlloggioMapper;
 import com.example.test_project.Model.alloggioModel;
 import com.example.test_project.Repository.alloggioRepo;
 
 import jakarta.persistence.EntityNotFoundException;
 
+@Service
 public class AlloggioService {
 	
-	@Autowired
-	private alloggioRepo allogRepo;
+	
+	
+	private final alloggioRepo allogRepo;
+
+    public AlloggioService(alloggioRepo allogRepo) {
+        this.allogRepo = allogRepo;
+    }
+
+    public AlloggioDettaglioDTO getAlloggioDett(Long idalloggio) {
+        alloggioModel model = allogRepo.findById(idalloggio)
+                .orElseThrow(() -> new RuntimeException("Alloggio non trovato"));
+        
+        // È qui che avviene la magia:
+        return AlloggioMapper.toAllDettDTO(model);
+    }
 	
 	//---------All--------------
-	public List<alloggioModel> findAllAlloggi(){
-		return allogRepo.findAll();
-	}
-	
-	//------ById-----------------------
-	public alloggioModel findById(Long id) {
-	    if (id == null) {
-	        throw new IllegalArgumentException("L'id non può essere null");
-	    }
+	 public List<AlloggioDTO> getAlloggi() {
+	        // leggi tutte le entità dal DB
+	        List<alloggioModel> alloggiList = allogRepo.findAll();
 
-	    return allogRepo.findById(id)
-	        .orElseThrow(() ->
-	            new EntityNotFoundException("Alloggio con id " + id + " non trovato")
-	        );
-	}
+	        // converti ciascuna entità in AlloggioDTO usando il mapper
+	        return alloggiList.stream()
+	                          .map(AlloggioMapper::toAlloggiDTO)
+	                          .toList();
+	    }
+	
 	
 	//-------ByTitolo-----------------------------
 	public List<alloggioModel> findByTitolo(String titolo) {

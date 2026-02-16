@@ -1,0 +1,78 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="w-100 divh1 d-flex justify-content-center align-items-center">
+  <h1 class="text-center">Alloggi disponibili</h1>
+</div>
+
+<div class="container p-4">
+
+  <div class="row g-4">
+    <div class="col-md-4" *ngFor="let a of alloggi()">
+
+      <div class="card h-100 shadow-sm">
+        <img
+          [src]="a.immaginePrincipale || 'https://via.placeholder.com/400x250'"
+          class="card-img-top"
+          alt="alloggio">
+
+        <div class="card-body">
+          <h5 class="card-title">{{ a.titolo }}</h5>
+          <p class="card-text text-muted">📍 {{ a.indirizzoCompleto }}</p>
+          <p class="card-text">⭐ {{ a.ratingMedio }} · 👥 {{ a.num_ospiti }} ospiti</p>
+        </div>
+
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <span class="fw-bold">€ {{ a.prezzo }} / notte</span>
+		  <button class="btn btn-primary btn-sm" (click)="apriDettagli(a)">
+		    Visualizza Dettagli
+		  </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal fade" id="dettagliModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content text-dark">
+
+        <div class="modal-header">
+          <h5 class="modal-title">{{ alloggioSelezionato()?.titolo }}</h5>
+          <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <!-- CAROUSEL -->
+          <div *ngIf="alloggioSelezionato()?.immagini?.length" class="mb-3">
+            <div id="carouselAlloggio" class="carousel slide">
+              <div class="carousel-inner">
+                <div class="carousel-item" *ngFor="let img of alloggioSelezionato()?.immagini; let i = index" [class.active]="i === 0">
+                  <img [src]="img" class="d-block w-100 rounded" alt="Immagine alloggio">
+                </div>
+              </div>
+
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselAlloggio" data-bs-slide="prev">
+                <span class="visually-hidden">Previous</span>
+              </button>
+
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselAlloggio" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+          <!-- /CAROUSEL -->
+
+          <p>📍 {{ alloggioSelezionato()?.indirizzoCompleto }}</p>
+          <p>👥 {{ alloggioSelezionato()?.num_ospiti }} ospiti</p>
+          <p>⭐ {{ alloggioSelezionato()?.ratingMedio }}</p>
+          <p>{{ alloggioSelezionato()?.descrizione }}</p>
+          <p class="fw-bold">€ {{ alloggioSelezionato()?.prezzo }} / notte</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class AlloggioDettaglioDTO {
 	
-	private long idAlloggio;
+	private long idalloggio;
 	private String titolo;
 	private String descrizione;
 	private String indirizzoCompleto;
@@ -20,11 +20,11 @@ public class AlloggioDettaglioDTO {
 	}
 
 	public long getIdAlloggio() {
-		return idAlloggio;
+		return idalloggio;
 	}
 
-	public void setIdAlloggio(long idAlloggio) {
-		this.idAlloggio = idAlloggio;
+	public void setIdAlloggio(long idalloggio) {
+		this.idalloggio = idalloggio;
 	}
 
 	public String getTitolo() {

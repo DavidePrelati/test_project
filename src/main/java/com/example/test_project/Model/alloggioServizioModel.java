@@ -3,6 +3,7 @@ package com.example.test_project.Model;
 import org.hibernate.annotations.ManyToAny;
 
 import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

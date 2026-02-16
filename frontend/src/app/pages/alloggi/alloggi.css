@@ -1,0 +1,39 @@
+.card img {
+  height: 220px;
+  object-fit: cover;
+}
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+html, body {
+      min-height: 100vh;
+      margin: 0;
+      background-color: white;
+    }
+
+.divh1{
+	background-color: rgb(232, 202, 140);
+	height: 150px;
+	   margin-bottom: 10px;
+	   
+	}
+	
+.container{
+	background-color: antiquewhite
+	 
+  }
+  
+  .modal-content{
+	background-color: antiquewhite;
+height: 100;
+  }
+  
+  .modal-dialog{
+	color: black;
+  }

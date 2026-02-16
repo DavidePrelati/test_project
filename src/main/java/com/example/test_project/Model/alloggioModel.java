@@ -18,15 +18,33 @@ public class alloggioModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idalloggio") 
 	private long idalloggio;
+
+	@Column(name="titolo")
 	private String titolo;
+	
+	@Column(name="descrizione")
 	private String descrizione;
+	
+	@Column(name="indirizzo")
 	private String indirizzo;
+	
+	@Column(name="citta")
 	private String citta;
+	
+	@Column(name="cap")
 	private int cap;
+	
+	@Column(name="paese")
 	private String paese;
+	
+	@Column(name="prezzo")
 	private double prezzo;
+	
+	@Column(name="num_ospiti")
 	private int num_ospiti;
+
 	
 	@OneToMany(mappedBy = "alloggio")
 	private List<prenotazioneModel> prenotazioni;
@@ -54,8 +72,8 @@ public class alloggioModel {
 	}
 
 
-	public void setIdAlloggio(long idalloggio) {
-		this.idalloggio = idalloggio;
+	public void setIdAlloggio(long idAlloggio) {
+		this.idalloggio = idAlloggio;
 	}
 
 

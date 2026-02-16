@@ -2,7 +2,7 @@ package com.example.test_project.DTO;
 
 public class AlloggioDTO {
 	
-	private long idAlloggio;
+	private long idalloggio;
 	private String titolo;
 	private String descrizione;
 	private String indirizzoCompleto;
@@ -15,11 +15,11 @@ public class AlloggioDTO {
 	}
 
 	public long getIdAlloggio() {
-		return idAlloggio;
+		return idalloggio;
 	}
 
-	public void setIdAlloggio(long idAlloggio) {
-		this.idAlloggio = idAlloggio;
+	public void setIdAlloggio(long idalloggio) {
+		this.idalloggio = idalloggio;
 	}
 
 	public String getTitolo() {
