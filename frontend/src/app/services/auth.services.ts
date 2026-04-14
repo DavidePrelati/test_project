@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080//auth';
+  private apiUrl = 'http://localhost:8080/auth';
   isLogged = signal(!!localStorage.getItem('token'));
 
   constructor(
