@@ -7,12 +7,12 @@
 <div class="container p-4">
 
   <div class="row g-4">
-    <div class="col-md-4" *ngFor="let a of alloggi()">
+    <div class="col-md-6 col-lg-4 " *ngFor="let a of alloggi()">
 
       <div class="card h-100 shadow-sm">
         <img
-          [src]="a.immaginePrincipale || 'https://via.placeholder.com/400x250'"
-          class="card-img-top"
+		  [src]="a.immaginePrincipale || 'https://picsum.photos/400/250'"          
+		  class="card-img-top"
           alt="alloggio">
 
         <div class="card-body">
@@ -47,7 +47,7 @@
             <div id="carouselAlloggio" class="carousel slide">
               <div class="carousel-inner">
                 <div class="carousel-item" *ngFor="let img of alloggioSelezionato()?.immagini; let i = index" [class.active]="i === 0">
-                  <img [src]="img" class="d-block w-100 rounded" alt="Immagine alloggio">
+                  <img [src]="img" class="d-block w-100 rounded img-fixed" alt="Immagine alloggio">
                 </div>
               </div>
 
@@ -67,7 +67,10 @@
           <p>👥 {{ alloggioSelezionato()?.num_ospiti }} ospiti</p>
           <p>⭐ {{ alloggioSelezionato()?.ratingMedio }}</p>
           <p>{{ alloggioSelezionato()?.descrizione }}</p>
-          <p class="fw-bold">€ {{ alloggioSelezionato()?.prezzo }} / notte</p>
+		  <div class="d-flex justify-content-between">
+          	<p class="fw-bold">€ {{ alloggioSelezionato()?.prezzo }} / notte</p>
+			<button (click)="onPrenotazioni(alloggio.idalloggio)">Prenota</button>
+		  </div>
         </div>
       </div>
     </div>

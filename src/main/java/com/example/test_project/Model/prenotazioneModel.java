@@ -25,7 +25,7 @@ public class prenotazioneModel {
 	private int stato;
 	
 	@ManyToOne
-	@JoinColumn(name="id_utente")
+	@JoinColumn(name="idutente")
 	private utenteModel utente;
 	
 	@ManyToOne

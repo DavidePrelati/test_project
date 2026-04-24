@@ -33,4 +33,9 @@ export class LoginComponent {
       }
     });
   }
+  
+  onRegister() {
+    console.log("CLICK FUNZIONA"); // test
+    this.router.navigate(['/register']);
+  }
 }

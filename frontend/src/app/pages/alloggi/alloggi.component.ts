@@ -1,9 +1,10 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlloggioService } from '../../services/alloggio.service';
 import { AlloggioDTO } from '../../models/alloggio.dto';
 import * as bootstrap from 'bootstrap';
 import { AlloggioDettaglioDTO } from '../../models/alloggiodett.dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alloggi',
@@ -13,6 +14,9 @@ import { AlloggioDettaglioDTO } from '../../models/alloggiodett.dto';
   styleUrls: ['./alloggi.css']
 })
 export class AlloggiComponent implements OnInit {
+	
+	private router = inject(Router);
+
 
   // lista alloggi
   alloggi = signal<AlloggioDTO[]>([]);
@@ -89,6 +93,11 @@ export class AlloggiComponent implements OnInit {
       new bootstrap.Carousel(carouselEl, { interval: 3000, ride: 'carousel' });
     }
   }
+  
+  onPrenotazioni(id: number) {
+    this.router.navigate(['/prenotazioni', id]);
+  }
+  
   }
 
 

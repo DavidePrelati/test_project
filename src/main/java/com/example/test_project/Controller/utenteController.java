@@ -3,6 +3,8 @@ package com.example.test_project.Controller;
 
 import com.example.test_project.Model.utenteModel;
 import com.example.test_project.Repository.utenteRepo;
+import com.example.test_project.Service.UtenteService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ public class utenteController {
 
     @Autowired
     private utenteRepo repo;
+    
+    @Autowired
+    private UtenteService utenteService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
@@ -44,5 +49,13 @@ public class utenteController {
 
         // Se le credenziali sono errate
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenziali errate");
+    }
+    
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody utenteModel utente) {
+        utenteService.register(utente);
+        return ResponseEntity.ok(Map.of(
+        	    "message", "Utente registrato"
+        	));
     }
 }

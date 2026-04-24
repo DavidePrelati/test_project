@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body class="bg-light">
+  <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+
+    <div class="card shadow border-0" 
+         style="width: 100%; max-width: 650px; border-radius: 18px;">
+
+      <div class="card-body p-5">
+
+        <h2 class="text-center fw-bold text-primary mb-2">
+          Benvenuto
+        </h2>
+
+        <p class="text-center text-secondary mb-4">
+          Crea il tuo account
+        </p>
+
+        <form (ngSubmit)="onRegister()">
+
+          <!-- Nome + Cognome -->
+          <div class="mb-4 d-flex justify-content-between">
+
+            <div >
+              <label class="form-label text-secondary">Nome</label>
+              <input type="text"
+                     class="form-control form-control-lg border-0 bg-light"
+                     style="border-radius: 12px;"
+                     [ngModel]="nome()"
+                     (ngModelChange)="nome.set($event)"
+                     name="nome"
+                     placeholder="Nome"
+                     required>
+            </div>
+
+            <div >
+              <label class="form-label text-secondary">Cognome</label>
+              <input type="text"
+                     class="form-control form-control-lg border-0 bg-light"
+                     style="border-radius: 12px;"
+                     [ngModel]="cognome()"
+                     (ngModelChange)="cognome.set($event)"
+                     name="cognome"
+                     placeholder="Cognome"
+                     required>
+            </div>
+
+          </div>
+
+          <!-- Nickname -->
+          <div class="mb-3">
+            <label class="form-label text-secondary">Nickname</label>
+            <input type="text"
+                   class="form-control form-control-lg border-0 bg-light"
+                   style="border-radius: 12px;"
+                   [ngModel]="utentecol()"
+                   (ngModelChange)="utentecol.set($event)"
+                   name="utentecol"
+                   placeholder="Nickname"
+                   required>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label class="form-label text-secondary">Email</label>
+            <input type="email"
+                   class="form-control form-control-lg border-0 bg-light"
+                   style="border-radius: 12px;"
+                   [ngModel]="email()"
+                   (ngModelChange)="email.set($event)"
+                   name="email"
+                   placeholder="esempio@mail.com"
+                   required>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-4">
+            <label class="form-label text-secondary">Password</label>
+            <input type="password"
+                   class="form-control form-control-lg border-0 bg-light"
+                   style="border-radius: 12px;"
+                   [ngModel]="password()"
+                   (ngModelChange)="password.set($event)"
+                   name="password"
+                   placeholder="••••••••"
+                   required>
+          </div>
+
+          <!-- Error -->
+          @if (errorMessage()) {
+            <div class="alert alert-danger small text-center py-2 rounded-3">
+              {{ errorMessage() }}
+            </div>
+          }
+
+          <!-- Button -->
+          <button type="submit"
+                  class="btn btn-primary btn-lg w-100 shadow-sm"
+                  style="border-radius: 12px;">
+            Registrati
+          </button>
+
+        </form>
+
+        <!-- Footer -->
+        <div class="text-center mt-4">
+          <span class="text-muted">Hai già un account?</span>
+          <button (click)="onLogin()"
+                  class="btn btn-link text-primary fw-semibold p-0 ms-1">
+            Accedi
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

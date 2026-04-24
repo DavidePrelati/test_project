@@ -14,10 +14,6 @@ import com.example.test_project.Model.utenteModel;
 @Repository
 public interface prenotazioneRepo extends JpaRepository<prenotazioneModel, Long> {
 
-    List<prenotazioneModel> findByData_checkin(LocalDate data_checkin); 
-
-    List<prenotazioneModel> findByData_checkout(LocalDate data_checkout);
-
     List<prenotazioneModel> findByUtente(utenteModel utente);
 
     List<prenotazioneModel> findByAlloggio(alloggioModel alloggio);

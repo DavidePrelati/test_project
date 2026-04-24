@@ -1,0 +1,58 @@
+<div class="container mt-4">
+
+  <div class="row">
+
+    <!-- INFO ALLOGGIO -->
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <img [src]="alloggio()?.immaginePrincipale" class="card-img-top" style="height:250px; object-fit:cover">
+
+        <div class="card-body">
+          <h3>{{ alloggio()?.titolo }}</h3>
+          <p>{{ alloggio()?.descrizione }}</p>
+          <p><strong>{{ alloggio()?.citta }}</strong></p>
+          <h5>{{ alloggio()?.prezzo }} € / notte</h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM PRENOTAZIONE -->
+    <div class="col-md-6">
+
+      <div class="card shadow-sm p-3">
+
+        <h4>Prenota ora</h4>
+
+        <!-- checkin -->
+        <label>Check-in</label>
+        <input type="date" class="form-control mb-2"
+               [(ngModel)]="booking.data_checkin"
+               (change)="calcolaPrezzo()">
+
+        <!-- checkout -->
+        <label>Check-out</label>
+        <input type="date" class="form-control mb-2"
+               [(ngModel)]="booking.data_checkout"
+               (change)="calcolaPrezzo()">
+
+        <!-- ospiti -->
+        <label>Numero ospiti</label>
+        <input type="number" class="form-control mb-2"
+               [(ngModel)]="booking.num_ospiti">
+
+        <!-- prezzo -->
+        <div class="alert alert-info">
+          Totale: <strong>{{ prezzoTotale }} €</strong>
+        </div>
+
+        <!-- bottone -->
+        <button class="btn btn-primary w-100"
+                (click)="prenota()">
+          Prenota
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+</div>

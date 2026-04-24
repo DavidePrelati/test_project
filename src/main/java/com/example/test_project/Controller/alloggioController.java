@@ -33,7 +33,7 @@ public class alloggioController {
     public ResponseEntity<List<AlloggioDTO>> getAlloggi() {
         return ResponseEntity.ok(alloggioService.getAlloggi());
     }
-
+    
     @GetMapping("/{id}")
     public AlloggioDettaglioDTO getAlloggio(@PathVariable("id") Long idalloggio) {
         return alloggioService.getAlloggioDett(idalloggio);

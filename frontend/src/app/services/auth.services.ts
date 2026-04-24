@@ -22,6 +22,12 @@ export class AuthService {
     });
   }
 
+  register(user: any) {
+    return this.http.post('http://localhost:8080/auth/register', user);
+  }
+  
+
+  
   saveSession(data: any) {
     localStorage.setItem('token', data.token);
     localStorage.setItem('nome', data.nome);
