@@ -69,7 +69,12 @@
           <p>{{ alloggioSelezionato()?.descrizione }}</p>
 		  <div class="d-flex justify-content-between">
           	<p class="fw-bold">€ {{ alloggioSelezionato()?.prezzo }} / notte</p>
-			<button (click)="onPrenotazioni(alloggio.idalloggio)">Prenota</button>
+			<button 
+			  *ngIf="alloggioSelezionato()?.idAlloggio as id"
+			  (click)="onPrenotazioni(id)">
+			  Prenota
+			</button>
+			
 		  </div>
         </div>
       </div>

@@ -1,14 +1,14 @@
-import { AlloggioDTO } from "./alloggio.dto";
-
-export interface AlloggioDettaglioDTO extends AlloggioDTO{
-  idalloggio: number;
+export interface AlloggioDettaglioDTO {
+  idAlloggio: number;
   titolo: string;
   descrizione: string;
   indirizzoCompleto: string;
+
   immagini: string[];
   prezzo: number;
   num_ospiti: number;
   ratingMedio: number;
+
   nomeHost: string;
   recensioni: string[];
 }

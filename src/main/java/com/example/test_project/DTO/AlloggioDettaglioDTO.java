@@ -4,12 +4,12 @@ import java.util.List;
 
 public class AlloggioDettaglioDTO {
 	
-	private long idalloggio;
+	private long idAlloggio;
 	private String titolo;
 	private String descrizione;
 	private String indirizzoCompleto;
 	private double prezzo;
-	private int numOspiti;
+	private int num_ospiti;
 	
 	private List<String> immagini;
 	private double ratingMedio;
@@ -20,11 +20,11 @@ public class AlloggioDettaglioDTO {
 	}
 
 	public long getIdAlloggio() {
-		return idalloggio;
+		return idAlloggio;
 	}
 
-	public void setIdAlloggio(long idalloggio) {
-		this.idalloggio = idalloggio;
+	public void setIdAlloggio(long idAlloggio) {
+		this.idAlloggio = idAlloggio;
 	}
 
 	public String getTitolo() {
@@ -60,11 +60,11 @@ public class AlloggioDettaglioDTO {
 	}
 
 	public int getNumOspiti() {
-		return numOspiti;
+		return num_ospiti;
 	}
 
-	public void setNumOspiti(int numOspiti) {
-		this.numOspiti = numOspiti;
+	public void setNumOspiti(int num_ospiti) {
+		this.num_ospiti = num_ospiti;
 	}
 
 	public List<String> getImmagini() {

@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-prenotazioni',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './prenotazioni.html'

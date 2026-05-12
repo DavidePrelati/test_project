@@ -35,13 +35,23 @@ export class AlloggiComponent implements OnInit {
     });
   }
 
-  // 👇 adapter: trasforma AlloggioDTO in AlloggioDettaglioDTO
+  // 👇 adapter: trasforma AlloggioDTO in AlloggioDettaglioDTO 
   adattaAlloggio(a: AlloggioDTO): AlloggioDettaglioDTO {
     return {
-      ...a, // copia tutti i campi comuni
+      idAlloggio: a.idalloggio,
+
+      titolo: a.titolo,
+      descrizione: a.descrizione,
+      indirizzoCompleto: a.indirizzoCompleto,
+
       immagini: a.immaginePrincipale ? [a.immaginePrincipale] : [],
-      nomeHost: 'Host sconosciuto', // puoi sostituire con valore reale
-      recensioni: [] // array vuoto temporaneo
+
+      prezzo: a.prezzo,
+      num_ospiti: a.num_ospiti,
+      ratingMedio: a.ratingMedio,
+
+      nomeHost: 'Host sconosciuto',
+      recensioni: []
     };
   }
 
@@ -50,7 +60,7 @@ export class AlloggiComponent implements OnInit {
       console.log("Oggetto ricevuto dal click:", alloggio);
 
       // 2. Cerchiamo l'ID provando tutte le varianti (CamelCase e minuscolo)
-      const id = alloggio.idAlloggio || alloggio.idalloggio || alloggio.id;
+      const id = alloggio.idAlloggio;
 
       console.log("ID estratto:", id);
 
