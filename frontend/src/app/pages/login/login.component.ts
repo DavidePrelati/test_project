@@ -8,7 +8,8 @@ import { AuthService } from '../../services/auth.services';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './login.html'
+  templateUrl: './login.html',
+  styleUrls: ['./login.css']
 })
 export class LoginComponent {
   // Iniezione dei servizi necessari

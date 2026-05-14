@@ -104,7 +104,19 @@ export class AlloggiComponent implements OnInit {
     }
   }
   
+  // Nel tuo file .ts
   onPrenotazioni(id: number) {
+    const modalElement = document.getElementById('dettagliModal');
+
+    // Controlliamo che l'elemento esista davvero
+    if (modalElement) {
+      const modalInstance = bootstrap.Modal.getInstance(modalElement);
+      if (modalInstance) {
+        modalInstance.hide();
+      }
+    }
+
+    // Navigazione
     this.router.navigate(['/prenotazioni', id]);
   }
   

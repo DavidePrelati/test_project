@@ -29,16 +29,17 @@ public class utenteController {
         String email = credentials.get("email");
         String password = credentials.get("password");
 
-        // Cerca l'utente per email
         Optional<utenteModel> utenteOpt = repo.findByEmail(email);
 
         if (utenteOpt.isPresent()) {
             utenteModel utente = utenteOpt.get();
             
-            // Verifica la password (in un progetto reale usa BCrypt!)
             if (utente.getPassword().equals(password)) {
-                // Crea la risposta che si aspetta il frontend
                 Map<String, Object> response = new HashMap<>();
+                
+                // AGGIUNGI QUESTA RIGA: è il pezzo fondamentale che mancava!
+                response.put("idutente", utente.getIdutente()); 
+                
                 response.put("token", "dummy-jwt-token-" + utente.getIdutente());
                 response.put("nome", utente.getNome());
                 response.put("ruolo", utente.getRuolo());
@@ -46,8 +47,6 @@ public class utenteController {
                 return ResponseEntity.ok(response);
             }
         }
-
-        // Se le credenziali sono errate
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenziali errate");
     }
     

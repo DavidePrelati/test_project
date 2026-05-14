@@ -10,7 +10,9 @@ import { ActivatedRoute, Router } from "@angular/router";
   selector: 'app-prenotazioni',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './prenotazioni.html'
+  templateUrl: './prenotazioni.html',
+  styleUrls: ['./prenotazioni.css']
+
 })
 export class PrenotazioniComponent {
   // Iniezione dei servizi necessari
@@ -49,7 +51,17 @@ export class PrenotazioniComponent {
           console.error("Errore caricamento alloggio", err);
         }
       });
+	  
+      const idSalvato = localStorage.getItem('idutente');
+      
+      if (idSalvato) {
+          this.booking.idutente = Number(idSalvato);
+          console.log("ID Utente pronto per la prenotazione:", this.booking.idutente);
+      } else {
+          console.error("Attenzione: ID utente non trovato nel localStorage!");
+      }
   }
+  
   
   calcolaPrezzo() {
     if (!this.alloggio() || !this.booking.data_checkin || !this.booking.data_checkout) return;
@@ -67,15 +79,26 @@ export class PrenotazioniComponent {
   
   
   prenota() {
-    this.booking.id_alloggio = this.alloggio()?.idalloggio;
-    this.booking.idutente = Number(localStorage.getItem("idutente"));
-    this.booking.prezzo = this.prezzoTotale;
+      const idSalvato = localStorage.getItem("idutente");
+      
+      if (!idSalvato) {
+        alert("Errore: Devi essere loggato per prenotare!");
+        this.router.navigate(['/login']); // Reindirizza al login se manca l'ID
+        return;
+      }
 
-    this.http.post("http://localhost:8080/prenotazione", this.booking)
-      .subscribe({
-        next: () => console.log("Prenotazione OK"),
-        error: (err) => console.error(err)
-      });
+      this.booking.idutente = Number(idSalvato);
+      this.booking.id_alloggio = this.alloggio()?.idalloggio || this.alloggio()?.idAlloggio;
+      this.booking.prezzo = this.prezzoTotale;
+      this.booking.stato = 1; // Imposta uno stato sensato, es. 1 = "In attesa"
+
+      console.log("Dati pronti per l'invio:", this.booking);
+
+      this.http.post("http://localhost:8080/prenotazione", this.booking)
+        .subscribe({
+          next: (res) => alert("Prenotazione effettuata!"),
+          error: (err) => console.error("Errore finale:", err)
+        });
   }
 	
 	

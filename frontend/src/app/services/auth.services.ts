@@ -29,10 +29,17 @@ export class AuthService {
 
   
   saveSession(data: any) {
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('nome', data.nome);
-    localStorage.setItem('ruolo', data.ruolo);
-    this.isLogged.set(true);
+      // Salviamo il token, il nome e il ruolo (quello che già facevi)
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('nome', data.nome);
+      localStorage.setItem('ruolo', data.ruolo);
+      
+      // AGGIUNGI QUESTA RIGA: salva l'ID nel browser
+      if (data.idutente) {
+          localStorage.setItem('idutente', data.idutente.toString());
+      }
+
+      this.isLogged.set(true);
   }
 
   logout() {

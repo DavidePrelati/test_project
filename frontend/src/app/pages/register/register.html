@@ -7,7 +7,10 @@
     <title>Login</title>
 </head>
 <body class="bg-light">
-  <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+	<div class="w-100 divh1 d-flex justify-content-center align-items-center">
+			<img src="logo-alloggi.png" class="logo"/>
+		</div>
+  <div class="container d-flex justify-content-center align-items-center">
 
     <div class="card shadow border-0" 
          style="width: 100%; max-width: 650px; border-radius: 18px;">
@@ -15,12 +18,10 @@
       <div class="card-body p-5">
 
         <h2 class="text-center fw-bold text-primary mb-2">
-          Benvenuto
+          Registrazione nuovo account
         </h2>
 
-        <p class="text-center text-secondary mb-4">
-          Crea il tuo account
-        </p>
+        <br>
 
         <form (ngSubmit)="onRegister()">
 

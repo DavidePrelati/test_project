@@ -1,1 +1,25 @@
 @import "bootstrap/dist/css/bootstrap.min.css";/* You can add global styles to this file, and also import other style files */
+
+/* 1. Per Chrome, Safari, Opera e versioni recenti di Edge */
+html::-webkit-scrollbar {
+  display: none;
+}
+  
+/* 2. Per Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* 3. Per Internet Explorer e versioni vecchie di Edge */
+html {
+  -ms-overflow-style: none;
+}
+
+/* Applichiamo lo stesso al body per sicurezza totale */
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}

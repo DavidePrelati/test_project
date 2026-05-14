@@ -1,17 +1,20 @@
-<div class="container mt-4">
+<div class="w-100 divh1 d-flex justify-content-center align-items-center">
+  <img src="logo-alloggi.png" class="logo"/>
+</div>
+
+<div class="container p-4">
 
   <div class="row">
 
-	<div class="container mt-4 p-4 border">
-	  <button class="btn btn-primary">
-	    TEST BOOTSTRAP
-	  </button>
-	</div>
+	
     <!-- INFO ALLOGGIO -->
     <div class="col-md-6">
       <div class="card shadow-sm">
-        <img [src]="alloggio()?.immaginePrincipale" class="card-img-top" style="height:250px; object-fit:cover">
-
+		<img 
+		  [src]="alloggio()?.immagini?.[0] || 'https://via.placeholder.com/400x250?text=Immagine+Non+Disponibile'" 
+		  class="card-img-top" 
+		  style="height:250px; object-fit:cover"
+		>
         <div class="card-body">
           <h3>{{ alloggio()?.titolo }}</h3>
           <p>{{ alloggio()?.descrizione }}</p>

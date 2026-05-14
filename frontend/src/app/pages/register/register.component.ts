@@ -8,7 +8,8 @@ import { AuthService } from '../../services/auth.services';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './register.html'
+  templateUrl: './register.html',
+  styleUrls:['./register.css']
 })
 export class RegisterComponent {
   // Iniezione dei servizi necessari
