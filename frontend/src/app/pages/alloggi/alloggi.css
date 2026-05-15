@@ -2,6 +2,8 @@
 	width: 200px;
 }
 
+
+
 .card img {
   height: 220px;
   object-fit: cover;
@@ -33,14 +35,32 @@ html, body {
 	  position: sticky;
 	  top: 0;
 	  
-	  /* Fondamentale: lo tiene sopra a tutto il resto (card, scritte, ecc.) */
+	  /* Fondamentale: lo tiene sopra a tutto il resto */
 	  z-index: 1000; 
 	  
-	  /* Opzionale: un'ombra leggera lo fa staccare bene dal contenuto sotto */
+	  /* Opzionale: un'ombra leggera */
 	  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-	  
-	  
 	  margin-bottom: 20px;
+	}
+
+	/* Stile per rendere il burger dello stesso colore del div ed eliminare i contorni */
+	.burger-btn {
+	  background-color: transparent !important;
+	  border: none !important;
+	  color: #333333; /* Colore delle 3 linee del burger, puoi cambiarlo in base al contrasto che preferisci */
+	  padding: 5px;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	}
+
+	/* Rimuove l'alone azzurro/nero di Bootstrap quando si clicca sul menu */
+	.burger-btn:focus, 
+	.burger-btn:active,
+	.burger-btn:focus-visible {
+	  outline: none !important;
+	  box-shadow: none !important;
+	  background-color: transparent !important;
 	}
 	
 	.img-fixed {

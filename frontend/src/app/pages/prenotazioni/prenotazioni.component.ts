@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from "../../services/auth.services";
 import { ActivatedRoute, Router } from "@angular/router";
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -96,11 +97,26 @@ export class PrenotazioniComponent {
 
       this.http.post("http://localhost:8080/prenotazione", this.booking)
         .subscribe({
-          next: (res) => alert("Prenotazione effettuata!"),
-          error: (err) => console.error("Errore finale:", err)
+          next: (res) => {
+			Swal.fire({
+			  title: "Prenotazione avvenuta con successo!",
+			  icon: "success",
+			  draggable: true,
+			  confirmButtonColor: '#e8ca8c'
+			});
+            this.router.navigate(['/alloggi']); // <-- Spostato qui: reindirizza SOLO se funziona
+          },
+          error: (err) =>{
+			Swal.fire({
+			  icon: "error",
+			  title: "Oops...",
+			  text: "Inserisci correttamente i campi",
+			  confirmButtonColor: '#e8ca8c'
+			});
+		  console.error("Errore finale:", err)
+		  } // Se c'è un errore, non reindirizza e rimane qui
         });
   }
-	
 	
 }
 

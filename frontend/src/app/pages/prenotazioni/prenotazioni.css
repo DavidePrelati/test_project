@@ -2,6 +2,43 @@
 	width: 200px;
 }
 
+.divh1 {
+	  background-color: rgb(232, 202, 140);
+	  height: 150px;
+	  width: 100%;
+	  
+	  /* Rende la barra fissa allo scroll */
+	  position: sticky;
+	  top: 0;
+	  
+	  /* Fondamentale: lo tiene sopra a tutto il resto */
+	  z-index: 1000; 
+	  
+	  /* Opzionale: un'ombra leggera */
+	  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+	  margin-bottom: 20px;
+	}
+
+	/* Stile per rendere il burger dello stesso colore del div ed eliminare i contorni */
+	.burger-btn {
+	  background-color: transparent !important;
+	  border: none !important;
+	  color: #333333; /* Colore delle 3 linee del burger, puoi cambiarlo in base al contrasto che preferisci */
+	  padding: 5px;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	}
+
+	/* Rimuove l'alone azzurro/nero di Bootstrap quando si clicca sul menu */
+	.burger-btn:focus, 
+	.burger-btn:active,
+	.burger-btn:focus-visible {
+	  outline: none !important;
+	  box-shadow: none !important;
+	  background-color: transparent !important;
+	}
+
 html, body {
       min-height: 100vh;
       margin: 0;
