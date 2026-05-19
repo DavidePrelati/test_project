@@ -6,41 +6,35 @@ import { AuthService } from "../../services/auth.services";
 import { ActivatedRoute, Router } from "@angular/router";
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-prenotazioni',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './prenotazioni.html',
   styleUrls: ['./prenotazioni.css']
-
 })
 export class PrenotazioniComponent {
-  // Iniezione dei servizi necessari
   private authService = inject(AuthService);
   private http = inject(HttpClient);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
-  
-  
+  // Struttura speculare al DTO 'PrenotazioneRequest' di Spring Boot
   booking = {
     data_checkin: '',
     data_checkout: '',
     num_ospiti: 1,
     prezzo: 0,
     stato: 0,
-    id_alloggio: 0,
-    idutente: 0
+    idutente: 0,      // Mappato su request.getIdutente()
+    id_alloggio: 0    // CORRETTO: Mappato su request.getId_alloggio()
   };
 
   alloggio = signal<any>(null);
   prezzoTotale = 0;
-  
-  
+
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-
     if (!id) return;
 
     this.http.get("http://localhost:8080/alloggi/" + id)
@@ -52,71 +46,67 @@ export class PrenotazioniComponent {
           console.error("Errore caricamento alloggio", err);
         }
       });
-	  
-      const idSalvato = localStorage.getItem('idutente');
-      
-      if (idSalvato) {
-          this.booking.idutente = Number(idSalvato);
-          console.log("ID Utente pronto per la prenotazione:", this.booking.idutente);
-      } else {
-          console.error("Attenzione: ID utente non trovato nel localStorage!");
-      }
+  	  
+    const idSalvato = localStorage.getItem('idutente');
+    if (idSalvato) {
+        this.booking.idutente = Number(idSalvato); 
+        console.log("ID Utente pronto per la prenotazione:", this.booking.idutente);
+    } else {
+        console.error("Attenzione: ID utente non trovato nel localStorage!");
+    }
   }
-  
   
   calcolaPrezzo() {
     if (!this.alloggio() || !this.booking.data_checkin || !this.booking.data_checkout) return;
 
     const inDate = new Date(this.booking.data_checkin);
     const outDate = new Date(this.booking.data_checkout);
-
-    const giorni = Math.max(
-      (outDate.getTime() - inDate.getTime()) / (1000 * 60 * 60 * 24),
-      0
-    );
+    const giorni = Math.max((outDate.getTime() - inDate.getTime()) / (1000 * 60 * 60 * 24), 0);
 
     this.prezzoTotale = giorni * this.alloggio()?.prezzo;
   }
   
-  
   prenota() {
-      const idSalvato = localStorage.getItem("idutente");
-      
-      if (!idSalvato) {
-        alert("Errore: Devi essere loggato per prenotare!");
-        this.router.navigate(['/login']); // Reindirizza al login se manca l'ID
-        return;
-      }
+    const idSalvato = localStorage.getItem("idutente");
+    
+    if (!idSalvato) {
+      alert("Errore: Devi essere loggato per prenotare!");
+      this.router.navigate(['/login']);
+      return;
+    }
 
-      this.booking.idutente = Number(idSalvato);
-      this.booking.id_alloggio = this.alloggio()?.idalloggio || this.alloggio()?.idAlloggio;
-      this.booking.prezzo = this.prezzoTotale;
-      this.booking.stato = 1; // Imposta uno stato sensato, es. 1 = "In attesa"
+    // Assicurati di prendere l'ID corretto dell'alloggio dal segnale
+    const alloggioId = this.alloggio()?.idalloggio || this.alloggio()?.idAlloggio;
 
-      console.log("Dati pronti per l'invio:", this.booking);
+    this.booking.idutente = Number(idSalvato);
+    this.booking.id_alloggio = Number(alloggioId); // Assegnazione al campo con l'underscore
+    this.booking.prezzo = this.prezzoTotale;
+    this.booking.stato = 1;
 
-      this.http.post("http://localhost:8080/prenotazione", this.booking)
-        .subscribe({
-          next: (res) => {
-			Swal.fire({
-			  title: "Prenotazione avvenuta con successo!",
-			  icon: "success",
-			  draggable: true,
-			  confirmButtonColor: '#e8ca8c'
-			});
-            this.router.navigate(['/alloggi']); // <-- Spostato qui: reindirizza SOLO se funziona
-          },
-          error: (err) =>{
-			Swal.fire({
-			  icon: "error",
-			  title: "Oops...",
-			  text: "Inserisci correttamente i campi",
-			  confirmButtonColor: '#e8ca8c'
-			});
-		  console.error("Errore finale:", err)
-		  } // Se c'è un errore, non reindirizza e rimane qui
-        });
+    console.log("Dati pronti per l'invio al DTO Java:", this.booking);
+
+    this.http.post("http://localhost:8080/prenotazione", this.booking)
+      .subscribe({
+        next: (res) => {
+          // Recupera il nome salvato nel localStorage durante il login
+          const nomeCliente = localStorage.getItem("nomeUtente") || "Cliente";
+
+          Swal.fire({
+            title: `Grazie ${nomeCliente}, prenotazione avvenuta con successo!`,
+            icon: "success",
+            confirmButtonColor: '#e8ca8c'
+          });
+          this.router.navigate(['/alloggi']);
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Impossibile completare la prenotazione. Controlla i dati.",
+            confirmButtonColor: '#e8ca8c'
+          });
+          console.error("Errore finale:", err);
+        }
+      });
   }
-	
 }
-

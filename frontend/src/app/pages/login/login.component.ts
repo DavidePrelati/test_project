@@ -12,7 +12,6 @@ import { AuthService } from '../../services/auth.services';
   styleUrls: ['./login.css']
 })
 export class LoginComponent {
-  // Iniezione dei servizi necessari
   private authService = inject(AuthService);
   private router = inject(Router);
 
@@ -21,11 +20,17 @@ export class LoginComponent {
   errorMessage = signal<string>('');
 
   onLogin() {
-    // Chiamata al metodo login del servizio
     this.authService.login(this.email(), this.password()).subscribe({
       next: (response) => {
-        // Salva i dati della sessione e naviga verso la pagina alloggi
+        // Salva la sessione tramite il tuo servizio principale
         this.authService.saveSession(response);
+
+        // --- SALVATAGGIO DEL NOME ---
+        if (response && response.nome) {
+          localStorage.setItem('nomeUtente', response.nome);
+        }
+        // -----------------------------
+
         this.router.navigate(['/alloggi']);
       },
       error: (err) => {
@@ -36,7 +41,7 @@ export class LoginComponent {
   }
   
   onRegister() {
-    console.log("CLICK FUNZIONA"); // test
+    console.log("CLICK FUNZIONA");
     this.router.navigate(['/register']);
   }
 }
